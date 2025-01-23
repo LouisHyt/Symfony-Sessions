@@ -1,0 +1,49 @@
+#header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 50px;
+}
+
+.page-title h2{
+    font-size: 1.7rem;
+}
+
+.page-title p{
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--text-description-clr);
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    & > * {
+        width: 45px;
+        aspect-ratio: 1;
+    }
+
+    & > a {
+        aspect-ratio: 1;
+        display: grid;
+        place-items: center;
+        border-radius: 5px;
+        font-size: 1.25rem;
+        padding: 12px;
+        background-color: var(--button-bg-clr);
+        transition: background-color 250ms;
+
+        &:hover{
+            background-color: var(--button-hover-bg-clr);
+        }
+    }
+
+    & > .avatar{
+        width: 55px;
+        border-radius: 50vw;
+        object-fit: cover;
+        outline: 3px solid var(--accent-clr);
+    }
+}

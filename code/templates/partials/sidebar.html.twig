@@ -1,0 +1,45 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href={{asset('css/sidebar.css')}}>
+{% endblock %}
+
+<nav id="sidebar">
+    <div class="title">
+        <img src={{asset('images/logo.png')}} alt="Website logo">
+        <h1>Aktion</h1>
+    </div>
+    <ul class="navigation">
+        <li>
+            <a href="">
+                <i class="fa-solid fa-house"></i>
+                <span>Overview</span>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <i class="fa-solid fa-bolt-lightning"></i>
+                <span href="">Trainings</span>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span href="">Sessions</span>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <i class="fa-solid fa-user-graduate"></i>
+                <span href="">Interns</span>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <i class="fa-solid fa-user-tie"></i>
+                <span href="">Trainers</span>
+            </a>
+        </li>
+    </ul>
+    <div class="footer">
+        <p>© 2025 - Provided by Louis HAYOTTE</p>
+    </div>
+</nav>

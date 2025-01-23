@@ -22,7 +22,45 @@
 
 }
 
+:root{
+    --bg-clr: #070E0E;
+    --secondary-bg-clr: #1A1E1F;
+    --button-bg-clr: #484848;
+    --button-hover-bg-clr: #606060;
+    --text-clr: #fff;
+    --text-secondary-clr: #D9D9D9;
+    --text-description-clr: #A4A4A4;
+    --accent-clr: #31EDE4;
+    --border-clr: #484848;
+
+    --header-height: 175px;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    display: grid;
+    grid-template-areas: 
+        "sidebar header header"
+        "sidebar main main"
+        "sidebar main main";
+    grid-template-rows: var(--header-height) 1fr 1fr;
+    grid-template-columns: 300px 1fr 1fr;
+    color: var(--text-clr);
+}
+
+#header{
+    grid-area: header;
+    background-color: var(--bg-clr);
+}
+
+#sidebar{
+    grid-area: sidebar;
+    background-color: var(--secondary-bg-clr);
+}
+
+#content{
+    grid-area: main;
+    background-color: var(--bg-clr);
 }
 
