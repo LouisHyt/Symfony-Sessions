@@ -37,6 +37,9 @@
     --header-height: 175px;
 }
 
+
+/* General styles */
+
 body {
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
@@ -64,5 +67,7 @@ body {
     grid-area: main;
     background-color: var(--bg-clr);
     padding: 50px;
+
+    view-transition-name: mycontent;
 }
 
