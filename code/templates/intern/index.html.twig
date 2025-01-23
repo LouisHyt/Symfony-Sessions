@@ -1,9 +1,71 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href={{asset('css/intern.css')}}>
+{% endblock %}
+
+{% block javascripts %}
+    <script src={{asset('js/internPanel.js')}} defer></script>
+{% endblock %}
+
 {% block title %} Interns Panel {% endblock %}
 {% block pageTitle %} Interns Panel {% endblock %}
 {% block pageDesc %} This is the page where you add, create, delete and list the interns  {% endblock %}
 
 {% block body %}
+    <div class="table-container">
 
+        <table class="interns-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Genre</th>
+                    <th>City</th>
+                    <th>Phone</th>
+                    <th>Sessions</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-intern-id="4">
+                    <td>1</td>
+                    <td>Mathilde Portier</td>
+                    <td>21</td>
+                    <td>F</td>
+                    <td>Belfort</td>
+                    <td>07 45 26 89 34</td>
+                    <td>2</td>
+                    <td>
+                        <span class="status waiting">Waiting for session</span>
+                    </td>
+                    <td class="actions">
+                        <button popovertarget="intern-actions" class="open-popover">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+                    </td>
+                </tr>
+                 <tr data-intern-id="9">
+                    <td>2</td>
+                    <td>Louis Beauchard</td>
+                    <td>27</td>
+                    <td>M</td>
+                    <td>Nancy</td>
+                    <td>06 42 39 12 04</td>
+                    <td>2</td>
+                    <td>
+                        <span class="status waiting">Waiting for session</span>
+                    </td>
+                    <td class="actions">
+                        <button class="open-popover">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+                    </td>
+                </tr>
+                <!-- Ajoutez d'autres lignes similaires pour les autres stagiaires -->
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

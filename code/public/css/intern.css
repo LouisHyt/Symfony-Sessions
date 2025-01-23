@@ -1,0 +1,69 @@
+.interns-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+
+    thead{
+        background: var(--secondary-bg-clr);
+    }
+
+    th {
+        padding: 15px;
+        text-align: left;
+        font-weight: 500;
+        color: var(--text-discrete-clr);
+    }
+
+    td {
+        padding: 16px;
+        border-bottom: 1px solid #2a2e32;
+    }
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+
+    &.waiting {
+        background: #235875;
+        color: #5bb5ee;
+    }
+
+    &.inactive {
+        background: #3f2328;
+        color: #ff6b6b;
+    }
+
+    &.in-session {
+        background: #2d3a1d;
+        color: #98c379;
+    }
+    
+}
+
+.actions {
+    text-align: right;
+
+    & > button{
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        
+        i {
+            color: var(--text-clr);
+            transition: color 250ms;
+        }
+
+        &:hover > i{
+            color: rgb(177, 177, 177);
+        }
+    }
+}
+
+/* Hover effect sur les lignes */
+.interns-table tbody tr:hover {
+    background: #1e2227;
+}
