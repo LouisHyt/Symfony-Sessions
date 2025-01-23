@@ -39,7 +39,8 @@
             color: var(--text-secondary-clr);
         }
 
-        a:hover{
+        a:hover,
+        a.active{
             background-color: #4bc6cad0;
             color: var(--text-clr);
         }

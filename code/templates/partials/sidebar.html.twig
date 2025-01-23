@@ -2,6 +2,8 @@
     <link rel="stylesheet" href={{asset('css/sidebar.css')}}>
 {% endblock %}
 
+{% set route = app.request.get('_route') %}
+
 <nav id="sidebar">
     <div class="title">
         <img src={{asset('images/logo.png')}} alt="Website logo">
@@ -9,31 +11,31 @@
     </div>
     <ul class="navigation">
         <li>
-            <a href="">
+            <a href={{ path('home_index') }} class={{route starts with 'home' ? 'active'}}>
                 <i class="fa-solid fa-house"></i>
                 <span>Overview</span>
             </a>
         </li>
         <li>
-            <a href="">
+            <a href={{ path('training_index') }} class={{route starts with 'training' ? 'active'}}>
                 <i class="fa-solid fa-bolt-lightning"></i>
                 <span href="">Trainings</span>
             </a>
         </li>
         <li>
-            <a href="">
+            <a href={{ path('session_index') }} class={{route starts with 'session' ? 'active'}}>
                 <i class="fa-solid fa-calendar-days"></i>
                 <span href="">Sessions</span>
             </a>
         </li>
         <li>
-            <a href="">
+            <a href={{ path('intern_index') }} class={{route starts with 'intern' ? 'active'}}>
                 <i class="fa-solid fa-user-graduate"></i>
                 <span href="">Interns</span>
             </a>
         </li>
         <li>
-            <a href="">
+            <a href={{ path('trainer_index') }} class={{route starts with 'trainer' ? 'active'}}>
                 <i class="fa-solid fa-user-tie"></i>
                 <span href="">Trainers</span>
             </a>

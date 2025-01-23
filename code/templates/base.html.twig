@@ -16,7 +16,10 @@
     </head>
     <body>
         {% include "partials/sidebar.html.twig" %}
-        {% include "partials/header.html.twig" %}
+        {% include "partials/header.html.twig" with {
+            'pageTitle': block('pageTitle'),
+            'pageDesc': block('pageDesc')
+        } %}
         <main id="content">
             {% block body %}{% endblock %}
         </main>
