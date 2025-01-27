@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src={{asset('js/utils/debounce.js')}} defer></script>
+    <script src={{asset('js/utils/updateTransition.js')}} defer></script>
     <script src={{asset('js/internPanel.js')}} defer></script>
 {% endblock %}
 
@@ -14,7 +16,7 @@
 
 {% block body %}
     <div class="table-container">
-        <div class="search-filter-container">
+        <div class="header-table">
             <div class="search-bar">
                 <i class="fa-solid fa-search"></i>
                 <input type="text" placeholder="Search interns...">
@@ -28,22 +30,26 @@
                     <div class="filter-group">
                         <label for="status-filter">Status</label>
                         <select id="status-filter">
-                            <option value="">All</option>
-                            <option value="active">Active</option>
+                            <option value="all">All</option>
+                            <option value="in-session">In Session</option>
+                            <option value="waiting">Waiting</option>
                             <option value="inactive">Inactive</option>
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label for="city-filter">City</label>
-                        <select id="city-filter">
-                            <option value="">All</option>
-                            <option value="paris">Paris</option>
-                            <option value="lyon">Lyon</option>
-                            <option value="marseille">Marseille</option>
+                        <label for="genre-filter">Genre</label>
+                        <select id="genre-filter">
+                            <option value="all">All</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
                         </select>
                     </div>
                 </div>
             </div>
+            <a href={{ path('intern_add') }} class="add-intern-btn">
+                <i class="fa-solid fa-user-plus"></i>
+                Add Intern
+            </a>
         </div>
         <table class="interns-table">
             <thead>
@@ -61,7 +67,13 @@
             </thead>
             <tbody>
             {% for intern in interns %}
-                <tr data-intern-id={{intern.id}}>
+                <tr 
+                    data-intern-id={{intern.id}} 
+                    data-fullname="{{intern.fullname}}"
+                    data-genre="{{intern.genre}}"
+                    data-status="{{intern.sessionstatus.class}}"
+                    style="view-transition-name: intern-row-{{intern.id}}"
+                >
                     <td>{{intern.id}}</td>
                     <td>{{intern.fullname}}</td>
                     <td>{{intern.age}}</td>

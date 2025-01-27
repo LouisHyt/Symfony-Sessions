@@ -1,5 +1,14 @@
 const openActionsMenu = document.querySelectorAll(".open-actions");
 const internRows = document.querySelectorAll("tr[data-intern-id]");
+const searchInput = document.querySelector(".search-bar > input");
+
+//Filters Inport
+const filterBtn = document.querySelector('.filter-btn');
+const filters = document.querySelector('.filters');
+const statusFilter = document.querySelector('#status-filter');
+const genreFilter = document.querySelector('#genre-filter');
+
+
 
 openActionsMenu.forEach((button) => {
     button.addEventListener("click", (e) => {
@@ -17,33 +26,72 @@ internRows.forEach((row) => {
     });
 });
 
+
+const handleSearchInput = debounce((e) => {
+    const inputValue = e.target.value.toLowerCase().trim();
+    updateTransition(() => {
+        internRows.forEach((row) => {
+            const name = row.dataset.fullname.toLowerCase().trim();
+            if (name.includes(inputValue)) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+
+}, 250);
+
+searchInput.addEventListener('input', handleSearchInput)
+
+
+
 //Filters
-
-const filterBtn = document.querySelector('.filter-btn');
-const filters = document.querySelector('.filters');
-
 filterBtn.addEventListener('click', function() {
     filters.classList.toggle('active');
 });
 
-// Close filters when clicking outside
-document.addEventListener('click', function(event) {
-    if (!filters.contains(event.target) && filters.classList.contains('active')) {
-        filters.classList.remove('active');
-    }
+statusFilter.addEventListener('change', () => {
+
+    const selectedStatus = statusFilter.value;
+    updateTransition(() => {
+        internRows.forEach((row) => {
+            const status = row.dataset.status;
+            if (selectedStatus === "all" || status === selectedStatus) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    })
 });
 
-function clearActivePopover() {
-    document.removeEventListener("click", handleCloseClick)
-    const activePopover = document.querySelector('.popover.visible');
-    if(!activePopover) return
-    activePopover.classList.remove("visible");
-}
+genreFilter.addEventListener('change', () => {
 
-function handleCloseClick(e){
-    if(!e.target.closest(".popover")){
-        clearActivePopover();
+    const selectedGenre = genreFilter.value;
+    updateTransition(() => {
+        internRows.forEach((row) => {
+            const status = row.dataset.genre;
+            if (selectedGenre === "all" || status === selectedGenre) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    })
+});
+
+
+document.addEventListener('click', (e)  => {
+    if (!filters.contains(e.target) && filters.classList.contains('active')) {
+        filters.classList.remove('active');
     }
-}
 
+    if(!e.target.closest(".popover")){
+        const activePopover = document.querySelector('.popover.visible');
+        if(!activePopover) return
+        activePopover.classList.remove("visible");
+    }
+
+});
 

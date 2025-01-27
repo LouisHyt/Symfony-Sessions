@@ -20,11 +20,18 @@
         text-decoration: none;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            view-transition-name: unset !important;
+        }
+    }
+
 }
 
 :root{
     --bg-clr: #070E0E;
     --secondary-bg-clr: #1A1E1F;
+    --tertiary-bg-clr: #131313;
     --button-bg-clr: #484848;
     --button-hover-bg-clr: #606060;
     --text-clr: #fff;
@@ -33,6 +40,8 @@
     --text-discrete-clr: #8b8b8b;
     --accent-clr: #31EDE4;
     --border-clr: #484848;
+    --danger-clr: #823637;
+    --neutral-clr: #368082;
 
     --header-height: 175px;
 }
