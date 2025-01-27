@@ -66,12 +66,42 @@
         position: absolute;
         border-radius: 10px;
         z-index: 2;
-        background: var(--secondary-bg-clr);
-        display: flex;
+        background: rgb(20, 20, 20);
+        color: var(--text-discrete-clr);
+        display: none;
         flex-direction: column;
-        padding: 15px;
-        gap: 15px;
         align-items: flex-start;
+        top: 50%;
+        right: 50%;
+        translate: 30% 0%;
+        overflow: hidden;
+        gap: 2px;
+
+        &.visible{
+            display: flex;
+        }
+
+        & > a {
+            padding-block: 15px;
+            padding-inline: 15px;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        & > a:hover{
+            background: rgb(36, 36, 36);
+        }
+
+        & > a.edit:hover{
+            color: rgb(192, 216, 54);
+        }
+
+        & > a.delete:hover{
+            color: rgb(235, 68, 68);
+        }
     }
 }
 
