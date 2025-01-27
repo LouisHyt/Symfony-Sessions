@@ -2,7 +2,6 @@
     width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
-    overflow: hidden;
 
     thead{
         background: var(--secondary-bg-clr);
@@ -45,6 +44,7 @@
 
 .actions {
     text-align: right;
+    position: relative;
 
     & > button{
         background: none;
@@ -60,6 +60,18 @@
         &:hover > i{
             color: rgb(177, 177, 177);
         }
+    }
+
+    & > .popover{
+        position: absolute;
+        border-radius: 10px;
+        z-index: 2;
+        background: var(--secondary-bg-clr);
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+        align-items: flex-start;
     }
 }
 

@@ -1,7 +1,7 @@
-const openPopoverIcon = document.querySelectorAll(".open-popover");
+const openActionsMenu = document.querySelectorAll(".open-actions");
 
-openPopoverIcon.forEach((icon) => {
-    icon.addEventListener("click", () => {
+openActionsMenu.forEach((button) => {
+    button.addEventListener("click", () => {
         const userId = icon.closest('tr').dataset.internId;
         console.log(userId);
     });
