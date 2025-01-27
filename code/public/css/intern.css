@@ -1,3 +1,13 @@
+#content::after{
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 85px;
+    background: linear-gradient(to top, var(--bg-clr), rgba(0, 0, 0, 0));
+}
+
 .interns-table {
     width: 100%;
     border-collapse: collapse;
@@ -17,6 +27,10 @@
     td {
         padding: 16px;
         border-bottom: 1px solid #2a2e32;
+    }
+
+    tr {
+        cursor: pointer;
     }
 }
 
@@ -108,4 +122,96 @@
 /* Hover effect sur les lignes */
 .interns-table tbody tr:hover {
     background: #1e2227;
+}
+
+/* A reformater */
+.search-filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-bg-clr);
+    border-radius: 20px;
+    padding: 8px 15px;
+    width: 300px;
+}
+
+.search-bar i {
+    color: var(--text-discrete-clr);
+    margin-right: 10px;
+}
+
+.search-bar input {
+    background: none;
+    border: none;
+    color: var(--text-clr);
+    font-size: 14px;
+    width: 100%;
+}
+
+.search-bar input::placeholder {
+    color: var(--text-discrete-clr);
+}
+
+.filters {
+    position: relative;
+}
+
+.filter-btn {
+    background-color: var(--secondary-bg-clr);
+    color: var(--text-clr);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.filter-btn i {
+    margin-right: 8px;
+}
+
+.filter-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--secondary-bg-clr);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    display: none;
+    z-index: 10;
+}
+
+.filter-group {
+    margin-bottom: 10px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-discrete-clr);
+    font-size: 12px;
+}
+
+.filter-group select {
+    width: 100%;
+    background-color: var(--bg-clr);
+    color: var(--text-clr);
+    border: 1px solid var(--border-clr);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+/* Show filter dropdown when filter button is clicked */
+.filters.active .filter-dropdown {
+    display: block;
 }

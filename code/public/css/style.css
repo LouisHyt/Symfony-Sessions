@@ -67,7 +67,8 @@ body {
     grid-area: main;
     background-color: var(--bg-clr);
     padding: 50px;
-
-    view-transition-name: mycontent;
+    height: 100%;
+    position: relative;
+    overflow-y: auto;
 }
 

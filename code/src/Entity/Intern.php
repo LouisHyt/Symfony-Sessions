@@ -88,7 +88,7 @@ class Intern
 
         return $this;
     }
-
+    
     public function getBirthDate(): ?\DateTimeInterface
     {
         return $this->birthDate;
@@ -127,7 +127,11 @@ class Intern
 
     public function getPhone(): ?string
     {
-        return $this->phone;
+        $phoneNumber = preg_replace('/[^0-9]/', '', $this->phone);
+        if (strlen($phoneNumber) === 10) {
+            return chunk_split($phoneNumber, 2, ' ');
+        }
+        return $phoneNumber;
     }
 
     public function setPhone(string $phone): static
@@ -159,5 +163,46 @@ class Intern
         $this->sessions->removeElement($session);
 
         return $this;
+    }
+
+
+    //Custom Methods
+    public function getFullName(): ?string
+    {
+        return $this->firstName . " " . $this->lastName;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->birthDate->diff(new \DateTime())->y;
+    }
+
+    public function getSessionStatus(): ?array
+    {
+
+        $sessions = $this->sessions;
+        $currentDate = new \DateTime();
+        $sessionStatus = [
+            'label' => 'Inactive',
+            'class' => 'inactive'
+        ];
+
+        foreach ($sessions as $session) {
+            if ($session->getBeginDate() <= $currentDate && $session->getEndDate() >= $currentDate) {
+                $sessionStatus = [
+                    'label' => 'In Session',
+                    'class' => 'in-session'
+                ];
+                break;
+            } elseif ($session->getBeginDate() > $currentDate) {
+                $sessionStatus = [
+                    'label' => 'Waiting for session',
+                    'class' => 'waiting'
+                ];
+                break;
+            }
+        }
+
+        return $sessionStatus;
     }
 }

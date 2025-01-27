@@ -14,7 +14,37 @@
 
 {% block body %}
     <div class="table-container">
-
+        <div class="search-filter-container">
+            <div class="search-bar">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" placeholder="Search interns...">
+            </div>
+            <div class="filters">
+                <button class="filter-btn">
+                    <i class="fa-solid fa-filter"></i>
+                    Filters
+                </button>
+                <div class="filter-dropdown">
+                    <div class="filter-group">
+                        <label for="status-filter">Status</label>
+                        <select id="status-filter">
+                            <option value="">All</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="city-filter">City</label>
+                        <select id="city-filter">
+                            <option value="">All</option>
+                            <option value="paris">Paris</option>
+                            <option value="lyon">Lyon</option>
+                            <option value="marseille">Marseille</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
         <table class="interns-table">
             <thead>
                 <tr>
@@ -30,60 +60,35 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-intern-id="4">
-                    <td>1</td>
-                    <td>Mathilde Portier</td>
-                    <td>21</td>
-                    <td>F</td>
-                    <td>Belfort</td>
-                    <td>07 45 26 89 34</td>
-                    <td>2</td>
+            {% for intern in interns %}
+                <tr data-intern-id={{intern.id}}>
+                    <td>{{intern.id}}</td>
+                    <td>{{intern.fullname}}</td>
+                    <td>{{intern.age}}</td>
+                    <td>{{intern.genre}}</td>
+                    <td>{{intern.city}}</td>
+                    <td>{{intern.phone}}</td>
+                    <td>{{intern.sessions|length}}</td>
                     <td>
-                        <span class="status waiting">Waiting for session</span>
+                        {{include('components/status-bubble.html.twig', {sessionStatus: intern.sessionstatus})}}
                     </td>
                     <td class="actions">
                         <button class="open-actions">
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </button>
                         <div class="popover">
-                            <a class="action-row edit">
+                            <a class="action-row edit" href={{path('intern_edit', {id: intern.id})}}>
                                 <i class="fa-solid fa-pen"></i>
                                 <span>Edit</span>
                             </a>
-                            <a class="action-row delete">
+                            <a class="action-row delete" href={{path('intern_delete', {id: intern.id})}}>
                                 <i class="fa-solid fa-trash"></i>
                                 <span>Delete</span>
                             </a>                            
                         </div>
                     </td>
                 </tr>
-                 <tr data-intern-id="9">
-                    <td>2</td>
-                    <td>Louis Beauchard</td>
-                    <td>27</td>
-                    <td>M</td>
-                    <td>Nancy</td>
-                    <td>06 42 39 12 04</td>
-                    <td>2</td>
-                    <td>
-                        <span class="status waiting">Waiting for session</span>
-                    </td>
-                    <td class="actions">
-                        <button class="open-actions">
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <div class="popover">
-                            <a class="action-row edit">
-                                <i class="fa-solid fa-pen"></i>
-                                <span>Edit</span>
-                            </a>
-                            <a class="action-row delete">
-                                <i class="fa-solid fa-trash"></i>
-                                <span>Delete</span>
-                            </a>                            
-                        </div>
-                    </td>
-                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

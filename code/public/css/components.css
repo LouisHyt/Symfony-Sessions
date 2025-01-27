@@ -1,0 +1,21 @@
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+
+    &.waiting {
+        background: #235875;
+        color: #5bb5ee;
+    }
+
+    &.inactive {
+        background: #3f2328;
+        color: #ff6b6b;
+    }
+
+    &.in-session {
+        background: #5b6123;
+        color: #beb74b;
+    }
+    
+}
