@@ -43,7 +43,7 @@ class InternType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Intern::class,
-            'attr' => ['class' => 'intern-form']
+            'attr' => ['class' => 'form']
         ]);
     }
 }

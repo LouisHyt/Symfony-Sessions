@@ -87,7 +87,6 @@ body {
 
 /* Flash messages */
 .flashes{
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,4 +111,3 @@ body {
         background-color: var(--alert-error);
     }
 }
-
