@@ -185,4 +185,37 @@ class Session
 
         return $this;
     }
+
+    public function getStatus(): ?array
+    {
+
+        $currentDate = new \DateTime();
+        $sessionStatus = [
+            'label' => 'Finished',
+            'class' => 'danger'
+        ];
+
+        if ($this->getBeginDate() <= $currentDate && $this->getEndDate() >= $currentDate) {
+            $sessionStatus = [
+                'label' => 'In Progress',
+                'class' => 'active'
+            ];
+        } else if ($this->getBeginDate() > $currentDate) {
+            $sessionStatus = [
+                'label' => 'Planned',
+                'class' => 'neutral'
+            ];
+        }
+
+        return $sessionStatus;
+    }
+
+    public function getTotalDays(){
+        
+        $total = array_reduce($this->programs->toArray(), function($total, $program){
+            return $total + $program->getTotalDays();
+        } , 0);
+
+        return $total;
+    }
 }

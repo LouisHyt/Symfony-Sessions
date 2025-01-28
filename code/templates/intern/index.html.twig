@@ -16,41 +16,11 @@
 
 {% block body %}
     <div class="table-container">
-        <div class="header-table">
-            <div class="search-bar">
-                <i class="fa-solid fa-search"></i>
-                <input type="text" placeholder="Search interns...">
-            </div>
-            <div class="filters">
-                <button class="filter-btn">
-                    <i class="fa-solid fa-filter"></i>
-                    Filters
-                </button>
-                <div class="filter-dropdown">
-                    <div class="filter-group">
-                        <label for="status-filter">Status</label>
-                        <select id="status-filter">
-                            <option value="all">All</option>
-                            <option value="active">In Session</option>
-                            <option value="neutral">Waiting</option>
-                            <option value="danger">Inactive</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="genre-filter">Genre</label>
-                        <select id="genre-filter">
-                            <option value="all">All</option>
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <a href={{ path('intern_add') }} class="add-intern-btn">
-                <i class="fa-solid fa-user-plus"></i>
-                Add Intern
-            </a>
-        </div>
+        {% include "components/search-filter.html.twig" with {
+            entity: "intern",     
+            button_label: "Add an Intern",
+            button_class: "fa-solid fa-user-plus"     
+        }%}
         <table class="interns-table">
             <thead>
                 <tr>
@@ -69,7 +39,7 @@
             {% for intern in interns %}
                 <tr 
                     data-intern-id={{intern.id}} 
-                    data-fullname="{{intern.fullname}}"
+                    data-name="{{intern.fullname}}"
                     data-genre="{{intern.genre}}"
                     data-status="{{intern.sessionstatus.class}}"
                     style="view-transition-name: intern-row-{{intern.id}}"

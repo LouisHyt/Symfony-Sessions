@@ -1,0 +1,132 @@
+.search-and-filter{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.search-and-filter > .search-bar{
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-bg-clr);
+    border-radius: 20px;
+    padding: 10px 15px;
+    width: 300px;
+
+    & > i {
+        color: var(--text-discrete-clr);
+        margin-right: 10px;
+    }
+
+    & > input {
+        background: none;
+        border: none;
+        outline: none;
+        color: var(--text-clr);
+        font-size: 14px;
+        width: 100%;
+    }
+
+    &:has(input:focus) {
+        outline: 2px solid var(--accent-clr);
+    }
+
+    & > input::placeholder {
+        color: var(--text-discrete-clr);
+    }
+    
+}
+
+.search-and-filter .filters {
+    position: relative;
+
+    &.active > .filter-btn {
+        color: var(--text-clr);
+        background-color: var(--secondary-bg-clr);
+    }
+
+    .filter-btn {
+        background-color: var(--secondary-bg-clr);
+        color: var(--text-discrete-clr);
+        border: none;
+        border-radius: 20px;
+        padding: 10px 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        transition: 250ms;
+
+        & > i {
+            margin-right: 8px;
+        }
+
+        &:hover {
+            background-color: rgb(56, 56, 56);
+        }
+    }
+
+    .filter-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: var(--secondary-bg-clr);
+        border-radius: 10px;
+        padding: 15px;
+        margin-top: 10px;
+        display: none;
+        z-index: 10;
+    }
+
+    .filter-group {
+        margin-bottom: 10px;
+    }
+
+    .filter-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--text-discrete-clr);
+        font-size: 12px;
+    }
+    
+    .filter-group select {
+        width: 100%;
+        background-color: var(--bg-clr);
+        color: var(--text-clr);
+        border: 1px solid var(--border-clr);
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+}
+
+.search-and-filter .add-btn{
+    background-color: var(--accent-clr);
+    color: var(--bg-clr);
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 250ms;
+    margin-left: auto;
+    font-weight: 500;
+
+    &:hover{
+        background-color: #2ad6ce;
+    }
+
+    & > i {
+        margin-right: 8px;
+    }
+}
+
+
+
+/* Show filter dropdown when filter button is clicked */
+.filters.active .filter-dropdown {
+    display: block;
+}

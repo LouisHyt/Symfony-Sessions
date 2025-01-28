@@ -18,4 +18,10 @@ final class SessionController extends AbstractController{
             'sessions' => $sessions
         ]);
     }
+
+    #[Route('/session/add', name: 'session_add')]
+    public function add(): Response
+    {
+        return $this->render('session/add_edit.html.twig');
+    }
 }

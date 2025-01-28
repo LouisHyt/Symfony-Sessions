@@ -1,0 +1,47 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href={{asset('css/searchAndFilter.css')}}>
+{% endblock %}
+
+{% block javascripts %}
+<script src={{asset('js/utils/debounce.js')}} defer></script>
+<script src={{asset('js/utils/updateTransition.js')}} defer></script>
+    <script src={{asset('js/utils/searchAndFilter.js')}} defer></script>
+{% endblock %}
+
+{% set actionPath = "#{entity}_add" %}
+
+<div class="search-and-filter">
+    <div class="search-bar">
+        <i class="fa-solid fa-search"></i>
+        <input type="text" placeholder="Search interns...">
+    </div>
+    <div class="filters">
+        <button class="filter-btn">
+            <i class="fa-solid fa-filter"></i>
+            Filters
+        </button>
+        <div class="filter-dropdown">
+            <div class="filter-group">
+                <label for="status-filter">Status</label>
+                <select id="status-filter">
+                    <option value="all">All</option>
+                    <option value="active">In Session</option>
+                    <option value="neutral">Waiting</option>
+                    <option value="danger">Inactive</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="genre-filter">Genre</label>
+                <select id="genre-filter">
+                    <option value="all">All</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <a href={{ path(actionPath) }} class="add-btn">
+        <i class="{{button_class}}"></i>
+        {{button_label}}
+    </a>
+</div>
