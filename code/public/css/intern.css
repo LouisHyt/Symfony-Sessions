@@ -63,10 +63,8 @@
 
 .actions {
     position: relative;
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-    
+    text-align: right;
+
     & > a {
         transition: color 250ms;
     }
@@ -81,6 +79,7 @@
 
     & > a.delete{
         color: rgb(235, 68, 68);
+        margin-left: 15px;
 
         &:hover{
             color: rgb(179, 52, 52);
