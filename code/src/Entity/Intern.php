@@ -184,20 +184,20 @@ class Intern
         $currentDate = new \DateTime();
         $sessionStatus = [
             'label' => 'Inactive',
-            'class' => 'inactive'
+            'class' => 'danger'
         ];
 
         foreach ($sessions as $session) {
             if ($session->getBeginDate() <= $currentDate && $session->getEndDate() >= $currentDate) {
                 $sessionStatus = [
                     'label' => 'In Session',
-                    'class' => 'in-session'
+                    'class' => 'active'
                 ];
                 break;
             } elseif ($session->getBeginDate() > $currentDate) {
                 $sessionStatus = [
                     'label' => 'Waiting for session',
-                    'class' => 'waiting'
+                    'class' => 'neutral'
                 ];
                 break;
             }

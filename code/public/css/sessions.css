@@ -1,0 +1,59 @@
+.sessions-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
+}
+
+.session-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--secondary-bg-clr);
+    justify-content: center;
+    padding: 20px;
+    border-radius: 25px;
+    gap: 20px;
+
+    & > .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    & > .header > .actions{
+        font-size: 1.25em;
+        cursor: pointer;
+        transition: color 250ms;
+
+        &:hover{
+            color: rgb(175, 175, 175);
+        }
+    }
+
+    & > hr {
+        border: none;
+        background-color: var(--border-clr);
+        height: 1px;
+        margin-block: 10px;
+    }
+
+    & > .infos {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.85rem;
+        color: var(--text-description-clr);
+        font-weight: 500;
+
+        & > .left, & > .right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .item{
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+    }
+}
+

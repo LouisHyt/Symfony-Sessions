@@ -43,6 +43,10 @@
     --danger-clr: #823637;
     --neutral-clr: #368082;
 
+    --alert-success: #24b448;
+    --alert-warning: #c58229;
+    --alert-error: #c73d3d;
+
     --header-height: 175px;
 }
 
@@ -79,5 +83,33 @@ body {
     height: 100%;
     position: relative;
     overflow-y: auto;
+}
+
+/* Flash messages */
+.flashes{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    & > .alert {
+        padding: 15px 45px;
+        border-radius: 10px;
+        font-weight: 500;
+        width: max-content;
+    }
+
+    & > .alert-success {
+        background-color: var(--alert-success);
+    }
+
+    & > .alert-warning {
+        background-color: var(--alert-warning);
+    }
+
+    & > .alert-error {
+        background-color: var(--alert-error);
+    }
 }
 

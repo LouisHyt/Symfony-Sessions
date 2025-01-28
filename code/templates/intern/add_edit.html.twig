@@ -8,22 +8,36 @@
 
 {% endblock %}
 
-{% block title %} Intern Add Panel {% endblock %}
-{% block pageTitle %} Intern Add Panel {% endblock %}
-{% block pageDesc %} This is the page where you add an intern {% endblock %}
+{% set operation = isEdit ? "Edit" : "Add" %}
+
+{% block title %} Intern {{operation}} Panel {% endblock %}
+{% block pageTitle %} Intern {{operation}} Panel {% endblock %}
+{% block pageDesc %} 
+    {{isEdit ? 
+        "This is the page where you edit an intern."
+        :
+        "This is the page where you add an intern."
+    }} 
+{% endblock %}
 
 {% block body %}
     <div class="add-edit-container">
         <div class="infos">
             <h2>
                 <i class="fa-regular fa-file-lines"></i>
-                <span >Edit an Intern</span>
+                <span>{{operation}} an Intern</span>
             </h2>
-            <p class="description">Add an intern by specifying its informations (Interns cannot be added into sessions from this page) </p>
+            <p class="description">
+            {{isEdit ? 
+                "Edit an intern by updating their existing informations"
+                :
+                'Add an intern by specifying their informations (Interns cannot be added into sessions from this page)'
+            }}
+             </p>
             <hr />
         </div>
         <div class="form-container">
-            <form class="intern-form">
+            {{ form_start(internForm) }}
                 <div class="inner-form">
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -60,9 +74,9 @@
                 </div>
                 <div class="actions">
                     <a class="btn cancel" href={{path("intern_index")}}>Cancel</a>
-                    <button type="submit" class="btn submit">Submit</button>
+                    {{ form_widget(internForm.confirm) }}
                 </div>
-            </form>
+            {{ form_end(internForm) }}
         </div>
     </div>
 {% endblock %}

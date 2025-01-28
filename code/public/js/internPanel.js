@@ -1,4 +1,3 @@
-const openActionsMenu = document.querySelectorAll(".open-actions");
 const internRows = document.querySelectorAll("tr[data-intern-id]");
 const searchInput = document.querySelector(".search-bar > input");
 
@@ -7,25 +6,6 @@ const filterBtn = document.querySelector('.filter-btn');
 const filters = document.querySelector('.filters');
 const statusFilter = document.querySelector('#status-filter');
 const genreFilter = document.querySelector('#genre-filter');
-
-
-
-openActionsMenu.forEach((button) => {
-    button.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const popover = button.closest('.actions').querySelector(".popover");
-        popover.classList.toggle("visible");
-        document.addEventListener('click', handleCloseClick);
-    });
-});
-
-internRows.forEach((row) => {
-    row.addEventListener("click", (e) => {
-        const userId = row.dataset.internId;
-        window.location.href = `/interns/${userId}`
-    });
-});
-
 
 const handleSearchInput = debounce((e) => {
     const inputValue = e.target.value.toLowerCase().trim();
@@ -66,8 +46,8 @@ statusFilter.addEventListener('change', () => {
     })
 });
 
-genreFilter.addEventListener('change', () => {
 
+genreFilter.addEventListener('change', () => {
     const selectedGenre = genreFilter.value;
     updateTransition(() => {
         internRows.forEach((row) => {
@@ -82,15 +62,11 @@ genreFilter.addEventListener('change', () => {
 });
 
 
+
 document.addEventListener('click', (e)  => {
+
     if (!filters.contains(e.target) && filters.classList.contains('active')) {
         filters.classList.remove('active');
-    }
-
-    if(!e.target.closest(".popover")){
-        const activePopover = document.querySelector('.popover.visible');
-        if(!activePopover) return
-        activePopover.classList.remove("visible");
     }
 
 });

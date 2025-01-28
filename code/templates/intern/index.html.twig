@@ -82,22 +82,15 @@
                     <td>{{intern.phone}}</td>
                     <td>{{intern.sessions|length}}</td>
                     <td>
-                        {{include('components/status-bubble.html.twig', {sessionStatus: intern.sessionstatus})}}
+                        {{include('components/status-bubble.html.twig', {status: intern.sessionstatus})}}
                     </td>
                     <td class="actions">
-                        <button class="open-actions">
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <div class="popover">
-                            <a class="action-row edit" href={{path('intern_edit', {id: intern.id})}}>
-                                <i class="fa-solid fa-pen"></i>
-                                <span>Edit</span>
-                            </a>
-                            <a class="action-row delete" href={{path('intern_delete', {id: intern.id})}}>
-                                <i class="fa-solid fa-trash"></i>
-                                <span>Delete</span>
-                            </a>                            
-                        </div>
+                        <a class="action-row edit" href={{path('intern_edit', {id: intern.id})}}>
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                        <a class="action-row delete" href={{path('intern_delete', {id: intern.id})}}>
+                            <i class="fa-solid fa-trash"></i>
+                        </a>                            
                     </td>
                 </tr>
             {% endfor %}

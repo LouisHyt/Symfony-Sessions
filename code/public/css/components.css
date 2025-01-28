@@ -4,17 +4,17 @@
     font-size: 0.9em;
     white-space: nowrap;
 
-    &.waiting {
+    &.neutral {
         background: #235875;
         color: #5bb5ee;
     }
 
-    &.inactive {
+    &.danger {
         background: #3f2328;
         color: #ff6b6b;
     }
 
-    &.in-session {
+    &.active {
         background: #5b6123;
         color: #beb74b;
     }
