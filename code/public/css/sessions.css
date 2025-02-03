@@ -5,14 +5,13 @@
 }
 
 .session-card {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    grid-template-rows: auto 1fr auto auto;
     background-color: var(--secondary-bg-clr);
-    justify-content: center;
     padding: 20px;
     border-radius: 25px;
     gap: 20px;
+    position: relative;
 
     & > .header {
         display: flex;
@@ -24,7 +23,7 @@
         font-size: 1.1rem;
     }
 
-    & > .header > .actions{
+    & > .header .actions{
         font-size: 1.25em;
         cursor: pointer;
         transition: color 250ms;
@@ -38,7 +37,7 @@
         border: none;
         background-color: var(--border-clr);
         height: 1px;
-        margin-block: 10px;
+        margin-bottom: 10px;
     }
 
     & > .infos {
@@ -61,4 +60,54 @@
         }
     }
 }
+
+
+/* Gestion du menu contextuel */
+
+.dropdown {
+    position: relative;
+
+    .dropdown-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background-color: var(--tertiary-bg-clr);
+        border: 2px solid var(--border-clr);
+        border-radius: 5px;
+        display: none;
+        z-index: 1000;
+        overflow: hidden;
+
+        &.show{
+            display: block;
+        }
+
+        .dropdown-item {
+            display: flex;
+            gap: 10px;
+            cursor: pointer;
+            padding: 0.65rem 1rem;
+            color: var(--text-clr);
+            text-decoration: none;
+
+            &.edit:hover{
+                color: rgba(170, 228, 35, 0.862);
+                background-color: rgb(29, 29, 29);
+            }
+
+            &.delete:hover{
+                color: rgb(237, 94, 23);
+                background-color: rgb(29, 29, 29);
+            }
+        }
+    }
+}
+
+
 

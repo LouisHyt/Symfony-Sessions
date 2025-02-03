@@ -23,7 +23,7 @@ final class SessionController extends AbstractController{
         ]);
     }
 
-    #[Route('/intern/edit/{id}', name: 'session_edit', requirements: ['id' => '\d+'])]
+    #[Route('/session/edit/{id}', name: 'session_edit', requirements: ['id' => '\d+'])]
     #[Route('/session/add', name: 'session_add')]
     public function add_edit(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -52,4 +52,14 @@ final class SessionController extends AbstractController{
             'isEdit' => $isEdit
         ]);
     }
+
+    #[Route('/session/delete/{id}', name: 'session_delete', requirements: ['id' => '\d+'])]
+    public function delete(Session $session, EntityManagerInterface $entityManager): Response
+    { 
+        $entityManager->remove($session);
+        $entityManager->flush();
+        $this->addFlash('success', 'The session has been sucessfully removed!');
+        return $this->redirectToRoute('session_index');
+    }
+
 }

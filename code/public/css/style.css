@@ -20,6 +20,13 @@
         text-decoration: none;
     }
 
+    button{
+        border: none;
+        cursor: pointer;
+        background: inherit;
+        color: inherit;
+    }
+
     @media (prefers-reduced-motion: reduce) {
         * {
             view-transition-name: unset !important;
@@ -91,6 +98,10 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 15px;
+
+    &:has(.alert){
+        margin-bottom: 15px;
+    }
 
     & > .alert {
         padding: 15px 45px;

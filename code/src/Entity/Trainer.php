@@ -105,4 +105,10 @@ class Trainer
 
         return $this;
     }
+
+    //Custom Methods
+    public function getFullName(): ?string
+    {
+        return $this->firstName . " " . $this->lastName;
+    }
 }

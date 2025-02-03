@@ -64,6 +64,15 @@
 .form-container {
     flex-grow: 1;
     border-radius: inherit;
+    overflow: hidden;
+
+    & > [data-trigger]{
+        height: 100%;
+    }
+
+    & > [data-trigger]:not(.visible){
+        display: none;
+    }
 }
 
 .form {
