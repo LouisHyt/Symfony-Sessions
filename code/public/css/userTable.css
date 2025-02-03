@@ -14,8 +14,20 @@
         font-weight: 500;
         color: var(--text-discrete-clr);
 
-        &:nth-child(8){
-            width: 160px;
+        &[data-table-name]{
+            width: 300px;
+        }
+        
+        &[data-table-actions]{
+            width: 120px;
+        }
+
+
+        &[data-table-id],
+        &[data-table-sessions],
+        &[data-table-age],
+        &[data-table-genre] {
+            width: 100px;
         }
     }
 

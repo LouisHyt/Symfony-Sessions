@@ -92,6 +92,16 @@ body {
     overflow-y: auto;
 }
 
+#content::-webkit-scrollbar {
+    background: transparent;
+    width: 5px;
+}
+  
+#content::-webkit-scrollbar-thumb {
+    background: #484848;
+    border-radius: 5px;
+}
+
 /* Flash messages */
 .flashes{
     display: flex;
