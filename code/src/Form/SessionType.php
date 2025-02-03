@@ -40,12 +40,6 @@ class SessionType extends AbstractType
                 'choice_label' => 'fullname',
                 'placeholder' => 'Select a trainer'
             ])
-            ->add('training', EntityType::class, [
-                'class' => Training::class,
-                'required'   => false,
-                'choice_label' => 'name',
-                'placeholder' => 'Select a training'
-            ])
             ->add('confirm', SubmitType::class, [
                 "attr" => [
                     "class" => "btn submit"

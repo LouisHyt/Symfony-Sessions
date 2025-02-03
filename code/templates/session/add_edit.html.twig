@@ -77,17 +77,10 @@
                                 <label for="places">Places</label>
                                 {{ form_widget(sessionForm.places, {'attr': {'class': 'form-control'}}) }}
                             </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="trainer">Trainer</label>
-                                    {{ form_widget(sessionForm.trainer, {'attr': {'class': 'form-control'}}) }}
-                                    <p class="input-info">Can't find your trainer ? <a href={{path('trainer_add')}}>Add one</a></p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="training">Training</label>
-                                    {{ form_widget(sessionForm.training, {'attr': {'class': 'form-control'}}) }}
-                                    <p class="input-info">Can't find your traning ? <a href={{path('training_add')}}>Add one</a></p>
-                                </div>
+                            <div class="form-group">
+                                <label for="trainer">Trainer</label>
+                                {{ form_widget(sessionForm.trainer, {'attr': {'class': 'form-control'}}) }}
+                                <p class="input-info">Can't find your trainer ? <a href={{path('trainer_add')}}>Add one</a></p>
                             </div>
                         </div>
                     </div>
