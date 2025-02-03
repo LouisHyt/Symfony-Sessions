@@ -34,22 +34,18 @@ class SessionType extends AbstractType
             ->add('endDate',  DateType::class, [
                 'widget' => 'single_text'
             ])
-            // ->add('interns', EntityType::class, [
-            //     'class' => Intern::class,
-            //     'required'   => false,
-            //     'choice_label' => 'id',
-            //     'multiple' => true,
-            // ])
-            // ->add('trainer', EntityType::class, [
-            //     'class' => Trainer::class,
-            //     'required'   => false,
-            //     'choice_label' => 'id',
-            // ])
-            // ->add('training', EntityType::class, [
-            //     'class' => Training::class,
-            //     'required'   => false,
-            //     'choice_label' => 'name',
-            // ])
+            ->add('trainer', EntityType::class, [
+                'class' => Trainer::class,
+                'required'   => false,
+                'choice_label' => 'fullname',
+                'placeholder' => 'Select a trainer'
+            ])
+            ->add('training', EntityType::class, [
+                'class' => Training::class,
+                'required'   => false,
+                'choice_label' => 'name',
+                'placeholder' => 'Select a training'
+            ])
             ->add('confirm', SubmitType::class, [
                 "attr" => [
                     "class" => "btn submit"

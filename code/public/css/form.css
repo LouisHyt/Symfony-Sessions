@@ -116,6 +116,16 @@
     input[type="date"]{
         color-scheme: dark;
     }
+
+    .input-info{
+        color: var(--text-discrete-clr);
+        font-size: 0.85rem;
+
+        & > a {
+            color: var(--accent-clr);
+            text-decoration: underline;
+        }
+    }
 }
 
 .form-group label {

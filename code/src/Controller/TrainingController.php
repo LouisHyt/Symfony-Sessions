@@ -14,4 +14,10 @@ final class TrainingController extends AbstractController{
             'controller_name' => 'TrainingController',
         ]);
     }
+
+    #[Route('/training/add', name: 'training_add')]
+    public function add_edit(): Response
+    {
+        return $this->redirectToRoute('training_index');
+    }
 }

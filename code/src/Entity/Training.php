@@ -22,6 +22,7 @@ class Training
      * @var Collection<int, Session>
      */
     #[ORM\OneToMany(targetEntity: Session::class, mappedBy: 'training')]
+    #[ORM\JoinColumn(name: "training_id", referencedColumnName: "id", onDelete: "SET NULL")]
     private Collection $sessions;
 
     public function __construct()

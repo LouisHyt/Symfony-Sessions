@@ -28,7 +28,7 @@ final class SessionController extends AbstractController{
     public function add_edit(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if(!$session){
-            $session = new session();
+            $session = new Session();
         }
     
         $isEdit = $request->attributes->get('_route') === 'session_edit';
