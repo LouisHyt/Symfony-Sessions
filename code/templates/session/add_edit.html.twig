@@ -37,24 +37,27 @@
              </p>
             <hr />
             <div class="navigation">
-                <button class="nav-button active" data-target='infos'>
+                <button class="nav-button" data-target='infos'>
                     <i class="fa-solid fa-bars-staggered"></i>
                     <span>Informations</span>
                 </button>
-                <button class="nav-button" data-target='interns'>
-                    <i class="fa-solid fa-user-plus"></i>
-                    <span>Interns</span>
-                </button>
-                <button class="nav-button" data-target='modules'>
-                    <i class="fa-solid fa-dice-d6"></i>
-                    <span>Modules</span>
-                </button>
+                {% if isEdit %}
+                    <button class="nav-button" data-target='interns'>
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Interns</span>
+                    </button>
+                    <button class="nav-button" data-target='modules'>
+                        <i class="fa-solid fa-dice-d6"></i>
+                        <span>Modules</span>
+                    </button>
+                {% endif %}
+                
             </div>
         </div>
         <div class="form-container">
             {{ form_start(sessionForm) }}
                 <div class="inner-form">
-                    <div data-trigger="infos" class="visible">
+                    <div data-trigger="infos">
                         <div class="section">
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -88,44 +91,55 @@
                             </div>
                         </div>
                     </div>
-                    <div data-trigger="interns">
-                            <div class="column enrolled">
-                                <h3>Enrolled Interns</h3>
-                                <ul class="intern-list">
-                                    {% for intern in sessionInterns %}
-                                        <li>
-                                            <span>{{ intern.firstName }} {{ intern.lastName }}</span>
-                                            <a href={{path("session_removeIntern", {
-                                                session: session.id,
-                                                intern: intern.id
-                                            })}} class="unenroll-intern">
-                                                <i class="fa-solid fa-user-minus"></i>
-                                            </a>
-                                        </li>
-                                    {% else %}
-                                        <li>No interns enrolled yet.</li>
-                                    {% endfor %}
-                                </ul>
+                    {% if isEdit %} 
+                        <div data-trigger="interns" class="interns-container">
+                                <div class="column enrolled">
+                                    <h3>Enrolled Interns</h3>
+                                    <ul class="intern-list">
+                                        {% for intern in session.interns %}
+                                            <li>
+                                                <span>{{ intern.firstName }} {{ intern.lastName }}</span>
+                                                <a 
+                                                href={{path("session_removeIntern", {
+                                                    session: session.id,
+                                                    intern: intern.id
+                                                })}} 
+                                                class="unenroll-intern"
+                                                >
+                                                    <i class="fa-solid fa-user-minus"></i>
+                                                </a>
+                                            </li>
+                                        {% else %}
+                                            <li>No interns enrolled yet.</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="column not-enrolled">
+                                    <h3>Available Interns</h3>
+                                    <ul class="intern-list">
+                                        {% for intern in availableInterns %}
+                                            <li>
+                                                <span>{{ intern.firstName }} {{ intern.lastName }}</span>
+                                                <a 
+                                                href={{path("session_addIntern", {
+                                                    session: session.id,
+                                                    intern: intern.id
+                                                })}} 
+                                                class="enroll-intern"
+                                                >
+                                                    <i class="fa-solid fa-user-plus"></i>
+                                                </a>
+                                            </li>
+                                        {% else %}
+                                            <li>No available interns.</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="column not-enrolled">
-                                <h3>Available Interns</h3>
-                                <ul class="intern-list">
-                                    {% for intern in availableInterns %}
-                                        <li>
-                                            <span>{{ intern.firstName }} {{ intern.lastName }}</span>
-                                            <a href="" class="enroll-intern">
-                                                <i class="fa-solid fa-user-plus"></i>
-                                            </a>
-                                        </li>
-                                    {% else %}
-                                        <li>No available interns.</li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
+                        <div data-trigger="modules">
+                            
                         </div>
-                    <div data-trigger="modules">
-                        
-                    </div>
+                    {% endif %}
                 </div>
                  <div class="actions">
                     <a class="btn cancel" href={{path("session_index")}}>Cancel</a>
