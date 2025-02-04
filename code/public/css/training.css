@@ -1,0 +1,47 @@
+.training-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-rows: repeat(3, auto);
+    column-gap: 1.2rem;
+    row-gap: 10px;
+}
+
+.training-card {
+    background-color: var(--secondary-bg-clr);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem;
+    transition: 
+        transform 0.3s ease, 
+        box-shadow 0.3s ease,
+        outline 0.3s ease;
+    cursor: pointer;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: 1 / 4;
+
+    &:hover{
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    & > .training-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgb(62, 62, 62);
+    }
+
+    & > .session-count{
+        margin-top: 1rem;
+    }
+
+    & > .training-dates.empty{
+        color: var(--text-discrete-clr);
+    }
+
+    & > .training-info i {
+        margin-right: 0.5rem;
+    }
+
+}

@@ -1,9 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Trainings Panel {% endblock %}
-{% block pageTitle %} Trainings Panel {% endblock %}
-{% block pageDesc %} This is the page where you add, create, delete and list the trainings {% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href={{asset('css/training.css')}}>
+{% endblock %}
+
+{% block javascripts %}
+    <script src={{asset('js/trainingPanel.js')}} defer></script>
+{% endblock %}
+
+{% block title %} Training Panel {% endblock %}
+{% block pageTitle %} Training Panel {% endblock %}
+{% block pageDesc %} This is the page where you add, create, delete and list the trainings  {% endblock %}
 
 {% block body %}
-
+    {% include "components/search-filter.html.twig" with {
+            entity: "training",     
+            button_label: "Add a training",
+            button_class: "fa-solid fa-folder-plus"
+    }%}
+    <div class="training-grid">
+        {% for training in trainings %}
+            <div
+                data-training-id={{training.id}} 
+                data-name="{{training.name}}"
+                style="view-transition-name: training-card-{{training.id}}"
+                class="training-card"
+            >
+                <h3 class="training-name">{{ training.name }}</h3>
+                <p class="session-count">
+                    <i class="fas fa-calendar-alt"></i> 
+                    {{ training.sessions|length }} session{% if training.sessions|length > 1 %}s{% endif %}
+                </p>
+                {% if training.sessions is not empty %}
+                    {% set firstSession = training.sessions|sort((a, b) => a.beginDate <=> b.beginDate)|first %}
+                    {% set lastSession = training.sessions|sort((a, b) => b.endDate <=> a.endDate)|first %}
+                    <p class="training-dates">
+                        <i class="fas fa-clock"></i> 
+                        {{ firstSession.beginDate|date('d/m/Y') }} - {{ lastSession.endDate|date('d/m/Y') }}
+                    </p>
+                {% else %}
+                    <p class="training-dates empty">Aucune session programmée</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

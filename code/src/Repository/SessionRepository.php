@@ -16,6 +16,16 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
+    public function findAvailableSessions(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.training IS NULL')
+            ->orderBy('s.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */

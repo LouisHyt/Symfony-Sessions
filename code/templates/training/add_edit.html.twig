@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href={{asset('css/form.css')}}>
+{% endblock %}
+
+{% block javascripts %}
+    
+{% endblock %}
+
+{% set operation = isEdit ? "Edit" : "Add" %}
+
+{% block title %} {{operation}} Training Panel {% endblock %}
+{% block pageTitle %} {{operation}} Training Panel {% endblock %}
+{% block pageDesc %} 
+    {{isEdit ? 
+        "This is the page where you edit a training."
+        :
+        "This is the page where you add a training."
+    }} 
+{% endblock %}
+
+{% block body %}
+    <div class="add-edit-container">
+        <div class="sidebar-form">
+            <h2>
+                <i class="fa-regular fa-file-lines"></i>
+                <span>{{operation}} a training</span>
+            </h2>
+            <p class="description">
+            {{isEdit ? 
+                "Edit a training by updating its name and it's related sessions"
+                :
+                "Add a training by specifying its name and it's related sessions"
+            }}
+             </p>
+            <hr />
+            <div class="navigation">
+                <button class="nav-button active" data-target='infos'>
+                    <i class="fa-solid fa-bars-staggered"></i>
+                    <span>Informations</span>
+                </button>
+            </div>
+        </div>
+        <div class="form-container">
+            <div class="inner-form collapse">
+                <h3>General</h3>
+                {{ form_start(trainingForm) }}
+                    <div class="section">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            {{ form_widget(trainingForm.name, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <a class="btn cancel" href={{path("training_index")}}>Cancel</a>
+                        {{ form_widget(trainingForm.confirm) }}
+                    </div>
+                {{ form_end(trainingForm) }}
+            </div>
+            <div class="list-section">
+                {% if isEdit %}
+                <h3>Sessions</h3>
+                <ul class="session-list">
+                    {% for session in trainingSessions %}
+                        <li>
+                            {{ session.name }} 
+                            <button class="remove-session" data-session-id="{{ session.id }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="add-session-form">
+                    <select class="available-sessions">
+                        <option disabled selected value="">Add a session</option>
+                        {% for session in availableSessions %}
+                            <option value="{{ session.id }}">{{ session.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button class="add-session-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add a session</span>
+                    </button>
+                </div>
+                {% else %}
+                    <p class="unavailable-info">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>This section is only available in Edit mode</span>
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
