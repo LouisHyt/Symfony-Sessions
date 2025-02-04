@@ -8,6 +8,7 @@ use App\Entity\Trainer;
 use App\Entity\Training;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -40,6 +41,12 @@ class SessionType extends AbstractType
                 'choice_label' => 'fullname',
                 'placeholder' => 'Select a trainer'
             ])
+            ->add('training', EntityType::class, [
+                'class' => Training::class,
+                'required'   => false,
+                'choice_label' => 'name',
+                'placeholder' => 'Select a training'
+            ])
             ->add('confirm', SubmitType::class, [
                 "attr" => [
                     "class" => "btn submit"
@@ -52,7 +59,8 @@ class SessionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Session::class,
-            'attr' => ['class' => 'form']
+            'attr' => ['class' => 'form'],
+            'nonScheduledLessons' => [],
         ]);
     }
 }

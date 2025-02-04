@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Session;
 use App\Entity\Training;
+use App\Form\TrainingSessionType;
 use App\Form\TrainingType;
 use App\Repository\TrainingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,14 +25,15 @@ final class TrainingController extends AbstractController{
         ]);
     }
 
+    #[Route('/training/edit/{id}', name: 'training_edit', requirements: ['id' => '\d+'])]
     #[Route('/training/add', name: 'training_add')]
-    public function add(Training $training = null, Request $request, EntityManagerInterface $entityManager): Response
+    public function add_edit(Training $training = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if(!$training){
             $training = new Training();
         }
 
-        $isEdit = false;
+        $isEdit = $request->attributes->get('_route') === 'training_edit';
         $form = $this->createForm(TrainingType::class, $training);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
@@ -52,29 +54,12 @@ final class TrainingController extends AbstractController{
         ]);
     }
 
-    #[Route('/training/edit/{id}', name: 'training_edit', requirements: ['id' => '\d+'])]
-    public function edit(Training $training = null, Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/training/delete/{id}', name: 'training_delete', requirements: ['id' => '\d+'])]
+    public function delete(Training $training, EntityManagerInterface $entityManager): Response
     {
-
-        $isEdit = true;
-        $form = $this->createForm(TrainingType::class, $training);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $training = $form->getData();
-            $entityManager->persist($training);
-            $entityManager->flush();
-            $this->addFlash('success', 'The training has been sucessfully updated!');
-            return $this->redirectToRoute("training_index");
-        }
-
-        $availableSessions = $entityManager->getRepository(Session::class)->findAvailableSessions();
-
-
-        return $this->render('training/add_edit.html.twig', [
-            'trainingForm' => $form,
-            'isEdit' => $isEdit,
-            'trainingSessions' => $training->getSessions(),
-            'availableSessions' => $availableSessions
-        ]);
+        $entityManager->remove($training);
+        $entityManager->flush();
+        $this->addFlash('success', 'The training has been sucessfully removed!');
+        return $this->redirectToRoute('training_index');
     }
 }

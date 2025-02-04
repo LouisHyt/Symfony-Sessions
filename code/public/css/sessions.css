@@ -12,6 +12,7 @@
     border-radius: 25px;
     gap: 20px;
     position: relative;
+    cursor: pointer;
 
     & > .header {
         display: flex;
@@ -22,6 +23,7 @@
     & > h3{
         font-size: 1.1rem;
     }
+
 
     & > .header .actions{
         font-size: 1.25em;

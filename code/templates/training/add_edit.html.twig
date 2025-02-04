@@ -43,53 +43,20 @@
             </div>
         </div>
         <div class="form-container">
-            <div class="inner-form collapse">
-                <h3>General</h3>
-                {{ form_start(trainingForm) }}
-                    <div class="section">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            {{ form_widget(trainingForm.name, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+            {{ form_start(trainingForm) }}
+            <div class="inner-form">
+                <div class="section">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        {{ form_widget(trainingForm.name, {'attr': {'class': 'form-control'}}) }}
                     </div>
-                    <div class="actions">
-                        <a class="btn cancel" href={{path("training_index")}}>Cancel</a>
-                        {{ form_widget(trainingForm.confirm) }}
-                    </div>
-                {{ form_end(trainingForm) }}
-            </div>
-            <div class="list-section">
-                {% if isEdit %}
-                <h3>Sessions</h3>
-                <div class="add-session-form">
-                    <select class="available-sessions">
-                        <option disabled selected value="">Add a session</option>
-                        {% for session in availableSessions %}
-                            <option value="{{ session.id }}">{{ session.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="add-session-btn">
-                        <i class="fa-solid fa-plus"></i>
-                        <span>Add a session</span>
-                    </button>
                 </div>
-                <ul class="session-list">
-                    {% for session in trainingSessions %}
-                        <li>
-                            {{ session.name }} 
-                            <button class="remove-session" data-session-id="{{ session.id }}">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                    <p class="unavailable-info">
-                        <i class="fa-solid fa-lock"></i>
-                        <span>This section is only available in Edit mode</span>
-                    </p>
-                {% endif %}
             </div>
+            <div class="actions">
+                <a class="btn cancel" href={{path("training_index")}}>Cancel</a>
+                {{ form_widget(trainingForm.confirm) }}
+            </div>
+            {{ form_end(trainingForm) }}
         </div>
     </div>
 {% endblock %}

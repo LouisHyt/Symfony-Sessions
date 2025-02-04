@@ -69,11 +69,11 @@
     flex-direction: column;
     gap: 15px;
 
-    & > [data-trigger]{
+    [data-trigger]{
         height: 100%;
     }
 
-    & > [data-trigger]:not(.visible){
+    [data-trigger]:not(.visible){
         display: none;
     }
 
@@ -102,6 +102,7 @@
     border-radius: 10px;
     gap: 30px;
     background-color: var(--tertiary-bg-clr);
+    overflow-y: auto;
 
     &.collapse {
         padding: 20px;
@@ -116,6 +117,16 @@
         flex-direction: column;
         gap: 30px;
     }
+}
+
+.inner-form::-webkit-scrollbar {
+    background: transparent;
+    width: 5px;
+}
+  
+.inner-form::-webkit-scrollbar-thumb {
+    background: #484848;
+    border-radius: 5px;
 }
 
 .form-row {
@@ -296,7 +307,6 @@
 
 
 .unavailable-info {
-    background-color: #e9ecef;
     border-radius: 4px;
     padding: 15px;
     display: flex;

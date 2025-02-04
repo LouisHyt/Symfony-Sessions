@@ -41,23 +41,20 @@
                     <i class="fa-solid fa-bars-staggered"></i>
                     <span>Informations</span>
                 </button>
-                {% if isEdit %}
-                    <button class="nav-button" data-target='interns'>
-                        <i class="fa-solid fa-user-plus"></i>
-                        <span>Interns</span>
-                    </button>
-                    <button class="nav-button" data-target='modules'>
-                        <i class="fa-solid fa-dice-d6"></i>
-                        <span>Modules</span>
-                    </button>
-                {% endif %}
-                
+                <button class="nav-button" data-target='interns'>
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Interns</span>
+                </button>
+                <button class="nav-button" data-target='modules'>
+                    <i class="fa-solid fa-dice-d6"></i>
+                    <span>Modules</span>
+                </button>
             </div>
         </div>
         <div class="form-container">
-            <div data-trigger="infos" class="visible">
-                {{ form_start(sessionForm) }}
-                    <div class="inner-form">
+            {{ form_start(sessionForm) }}
+                <div class="inner-form">
+                    <div data-trigger="infos" class="visible">
                         <div class="section">
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -77,25 +74,64 @@
                                 <label for="places">Places</label>
                                 {{ form_widget(sessionForm.places, {'attr': {'class': 'form-control'}}) }}
                             </div>
-                            <div class="form-group">
-                                <label for="trainer">Trainer</label>
-                                {{ form_widget(sessionForm.trainer, {'attr': {'class': 'form-control'}}) }}
-                                <p class="input-info">Can't find your trainer ? <a href={{path('trainer_add')}}>Add one</a></p>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="trainer">Trainer</label>
+                                    {{ form_widget(sessionForm.trainer, {'attr': {'class': 'form-control'}}) }}
+                                    <p class="input-info">Can't find your trainer ? <a href={{path('trainer_add')}}>Add one</a></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="trainer">Training</label>
+                                    {{ form_widget(sessionForm.training, {'attr': {'class': 'form-control'}}) }}
+                                    <p class="input-info">Can't find your training ? <a href={{path('training_add')}}>Add one</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="actions">
-                        <a class="btn cancel" href={{path("session_index")}}>Cancel</a>
-                        {{ form_widget(sessionForm.confirm) }}
+                    <div data-trigger="interns">
+                            <div class="column enrolled">
+                                <h3>Enrolled Interns</h3>
+                                <ul class="intern-list">
+                                    {% for intern in sessionInterns %}
+                                        <li>
+                                            <span>{{ intern.firstName }} {{ intern.lastName }}</span>
+                                            <a href={{path("session_removeIntern", {
+                                                session: session.id,
+                                                intern: intern.id
+                                            })}} class="unenroll-intern">
+                                                <i class="fa-solid fa-user-minus"></i>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li>No interns enrolled yet.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="column not-enrolled">
+                                <h3>Available Interns</h3>
+                                <ul class="intern-list">
+                                    {% for intern in availableInterns %}
+                                        <li>
+                                            <span>{{ intern.firstName }} {{ intern.lastName }}</span>
+                                            <a href="" class="enroll-intern">
+                                                <i class="fa-solid fa-user-plus"></i>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li>No available interns.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    <div data-trigger="modules">
+                        
                     </div>
-                {{ form_end(sessionForm) }}
-            </div>
-            <div data-trigger="interns">
-                
-            </div>
-            <div data-trigger="modules">
-                
-            </div>
+                </div>
+                 <div class="actions">
+                    <a class="btn cancel" href={{path("session_index")}}>Cancel</a>
+                    {{ form_widget(sessionForm.confirm) }}
+                </div>
+            {{ form_end(sessionForm) }}
         </div>
     </div>
 {% endblock %}

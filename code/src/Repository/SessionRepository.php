@@ -26,6 +26,32 @@ class SessionRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findAvailableInterns($session_id): array
+    {
+
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+        $qb = $sub;
+        $qb->select('s')
+            ->from('App\Entity\Intern', 's')
+            ->leftJoin('s.sessions', 'se')
+            ->where('se.id = :id');
+        
+        $sub = $em->createQueryBuilder();
+
+        $sub->select('i')
+            ->from('App\Entity\Intern', 'i')
+            ->where($sub->expr()->notIn('i.id', $qb->getDQL()))
+            ->setParameter('id', $session_id)
+            ->orderBy('i.lastName', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        $query = $sub->getQuery();
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */

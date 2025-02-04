@@ -26,7 +26,24 @@
                 style="view-transition-name: training-card-{{training.id}}"
                 class="training-card"
             >
-                <h3 class="training-name">{{ training.name }}</h3>
+                <div class="header">
+                    <h3 class="training-name">{{ training.name }}</h3>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle">
+                            <i class="fa-solid fa-ellipsis-vertical actions"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item edit" href={{path('training_edit', {id: training.id})}}>
+                                <i class="fa-solid fa-pen"></i>
+                                <span>Edit</span>
+                            </a>
+                            <a class="dropdown-item delete" href={{path('training_delete', {id: training.id})}}>
+                                <i class="fa-solid fa-trash"></i>
+                                <span>Delete</span>
+                            </a>   
+                        </div>
+                    </div>
+                </div>
                 <p class="session-count">
                     <i class="fas fa-calendar-alt"></i> 
                     {{ training.sessions|length }} session{% if training.sessions|length > 1 %}s{% endif %}

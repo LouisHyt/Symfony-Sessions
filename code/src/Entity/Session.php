@@ -39,6 +39,7 @@ class Session
     private ?Trainer $trainer = null;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
+    #[ORM\JoinColumn(name: "training_id", referencedColumnName: "id", onDelete: "SET NULL")]
     private ?Training $training = null;
 
     /**

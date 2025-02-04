@@ -1,9 +1,9 @@
 .training-grid {
+    margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-template-rows: repeat(3, auto);
-    column-gap: 1.2rem;
-    row-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
+    grid-auto-rows: repeat(3, auto);
+    gap: 1.2rem;
 }
 
 .training-card {
@@ -18,7 +18,26 @@
     cursor: pointer;
     display: grid;
     grid-template-rows: subgrid;
-    grid-row: 1 / 4;
+    grid-row: span 3;
+
+    & > .header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgb(62, 62, 62);
+    }
+
+    & > .header .actions{
+        font-size: 1.25em;
+        cursor: pointer;
+        transition: color 250ms;
+
+        &:hover{
+            color: rgb(175, 175, 175);
+        }
+    }
 
     &:hover{
         transform: translateY(-5px);
@@ -36,6 +55,11 @@
         margin-top: 1rem;
     }
 
+    & > .session-count,
+    & > .training-dates {
+        color: var(--text-description-clr);
+    } 
+
     & > .training-dates.empty{
         color: var(--text-discrete-clr);
     }
@@ -44,4 +68,49 @@
         margin-right: 0.5rem;
     }
 
+}
+
+.dropdown {
+    position: relative;
+
+    .dropdown-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background-color: var(--tertiary-bg-clr);
+        border: 2px solid var(--border-clr);
+        border-radius: 5px;
+        display: none;
+        z-index: 1000;
+        overflow: hidden;
+
+        &.show{
+            display: block;
+        }
+
+        .dropdown-item {
+            display: flex;
+            gap: 10px;
+            cursor: pointer;
+            padding: 0.65rem 1rem;
+            color: var(--text-clr);
+            text-decoration: none;
+
+            &.edit:hover{
+                color: rgba(170, 228, 35, 0.862);
+                background-color: rgb(29, 29, 29);
+            }
+
+            &.delete:hover{
+                color: rgb(237, 94, 23);
+                background-color: rgb(29, 29, 29);
+            }
+        }
+    }
 }
