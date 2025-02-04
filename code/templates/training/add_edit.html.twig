@@ -61,16 +61,6 @@
             <div class="list-section">
                 {% if isEdit %}
                 <h3>Sessions</h3>
-                <ul class="session-list">
-                    {% for session in trainingSessions %}
-                        <li>
-                            {{ session.name }} 
-                            <button class="remove-session" data-session-id="{{ session.id }}">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </li>
-                    {% endfor %}
-                </ul>
                 <div class="add-session-form">
                     <select class="available-sessions">
                         <option disabled selected value="">Add a session</option>
@@ -83,6 +73,16 @@
                         <span>Add a session</span>
                     </button>
                 </div>
+                <ul class="session-list">
+                    {% for session in trainingSessions %}
+                        <li>
+                            {{ session.name }} 
+                            <button class="remove-session" data-session-id="{{ session.id }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </li>
+                    {% endfor %}
+                </ul>
                 {% else %}
                     <p class="unavailable-info">
                         <i class="fa-solid fa-lock"></i>
