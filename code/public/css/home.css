@@ -1,0 +1,173 @@
+.info-cards {
+    display: grid;
+    grid-template-columns: 450px 1fr 1fr 450px;
+    gap: 30px;
+    height: 420px;
+
+    & > .card {
+        background-color: var(--secondary-bg-clr);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px 30px;
+    
+        & > header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.3rem;
+        }
+    }
+}
+
+/* Session Part */
+.card.sessions {
+    grid-column: span 2;
+}
+
+.sessions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-top: 40px;
+    height: 100%;
+
+    & > .session-row.general {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
+        column-gap: 70px;
+
+        & > * {
+            grid-row: span 2;
+            display: grid;
+            align-items: center;
+            grid-template-rows: subgrid;
+        }
+    }
+
+    p{
+        color: var(--text-discrete-clr);
+    }
+
+    .session-created > span {
+        font-size: 3rem;
+        font-weight: 600;
+    }
+
+    .last-session {
+        text-align: right;
+
+        & > span {
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+    }
+
+    .session-row.bonus {
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+
+        & > .card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            width: 125px;
+            
+            & > i {
+                font-size: 2rem;
+            }
+
+            &:nth-child(1) {
+                background-color: #63c45f;  
+            }
+
+            &:nth-child(2) {
+                background-color: #5fc4b8;  
+            }
+
+            &:nth-child(3) {
+                background-color: #c45f69;  
+            }
+
+            & > .stats {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            & > .stats > span {
+                font-size: 2.3rem;
+                font-weight: 600;
+            }
+
+            & > .stats > p {
+                font-size: 1.2rem;
+                color: inherit;
+            }
+        }
+    }
+    
+}
+
+.card.trainings header {
+    .tag {
+        background-color: #5F6161;
+        border-radius: 6px;
+        padding: 5px 15px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Quick actions */
+.actions-container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+}
+
+.action-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    & > p {
+        color: var(--text-discrete-clr);
+        font-weight: 500;
+    }
+
+    & > .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    a {
+        display: inline-flex;
+        font-size: 0.9rem;
+        gap: 10px;
+        align-items: center;
+        font-weight: 600;
+        color: var(--text-description-clr);
+        background-color: #353535;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+        transition: 250ms;
+
+        &:hover{
+            color: white;
+            background-color: #484848;
+        }
+    }
+}
+

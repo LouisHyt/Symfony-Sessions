@@ -79,6 +79,79 @@ class SessionRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    private function getTotalSessions(): int
+    {
+        return $this->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    private function getLastCreatedSession(): string
+    {
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+        $qb = $sub;
+        $qb->select('MAX(s.id)')
+            ->from('App\Entity\Session', 's');
+        
+        $sub = $em->createQueryBuilder();
+
+        $sub->select('i.name')
+            ->from('App\Entity\Session', 'i')
+            ->where($sub->expr()->in('i.id', $qb->getDQL()))
+        ;
+
+        $query = $sub->getQuery();
+        return $query->getSingleScalarResult();
+    }
+
+
+    private function getUpcomingSessionsCount(): int
+    {
+        return $this->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->where('s.beginDate > :date')
+            ->setParameter('date', new \DateTime())
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    private function getOnGoingSessionsCount(): int
+    {
+        return $this->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->where('s.beginDate < :date AND s.endDate > :date')
+            ->setParameter('date', new \DateTime())
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    private function getFinishedSessionsCount(): int
+    {
+        return $this->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->where('s.endDate < :date')
+            ->setParameter('date', new \DateTime())
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function getGlobalInfos()
+    {
+        return [
+            'totalSessions' => $this->getTotalSessions(),
+            'lastCreatedSession' => $this->getLastCreatedSession(),
+            'upcomingSessionsCount' => $this->getUpcomingSessionsCount(),
+            'onGoingSessionsCount' => $this->getOnGoingSessionsCount(),
+            'finishedSessionsCount' => $this->getFinishedSessionsCount()
+        ];
+    }
+
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */

@@ -1,10 +1,100 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href={{asset('css/home.css')}}>
+{% endblock %}
+
 {% block title %} Home {% endblock %}
 {% block pageTitle %} Manage your Formation Center {% endblock %}
 {% block pageDesc %} Take a look at the overall informations {% endblock %}
 
 {% block body %}
-    <h2>Hello world</h2>
-    <p>How are yoi doing ?</p>
+    <section class="info-cards">
+        <div class="card trainings">
+            <header>
+                <p class="tag">#web</p>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </header>
+        </div>
+        <div class="card sessions">
+            <header>
+                <h3>Sessions</h3>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </header>
+            <div class="sessions-container">
+                <div class="session-row general">
+                    <div class="session-created">
+                        <span>{{sessionsData.totalSessions}}</span>
+                        <p>Sessions created</p>
+                    </div>
+                    <div class="last-session">
+                        <span>{{sessionsData.lastCreatedSession}}</span>
+                        <p>Last Sessions created</p>
+                    </div>
+                </div>
+                <div class="session-row bonus">
+                    <div class="card">
+                        <i class="fa-solid fa-dolly"></i>
+                        <div class="stats">
+                            <span>{{sessionsData.upcomingSessionsCount}}</span>
+                            <p>upcoming</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <div class="stats">
+                            <span>{{sessionsData.onGoingSessionsCount}}</span>
+                            <p>ongoing</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <div class="stats">
+                            <span>{{sessionsData.finishedSessionsCount}}</span>
+                            <p>finished</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card quick-actions">
+            <header>
+                <h3>Quick actions</h3>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </header>
+            <div class="actions-container">
+                <div class="action-section">
+                    <p>Users</p>
+                    <div class="actions">
+                        <a href={{path("intern_add")}}>
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Add an intern</span>
+                        </a>
+                        <a href={{path("trainer_add")}}>
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Add an trainer</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="action-section">
+                    <p>Sessions & more</p>
+                    <div class="actions">
+                        <a href={{path("session_add")}}>
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Create a session</span>
+                        </a>
+                        <a href={{path("training_add")}}>
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Create a training</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="interns-activity">
+
+    </section>
+
 {% endblock %}
