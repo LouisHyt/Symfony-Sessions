@@ -52,6 +52,33 @@ class SessionRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function findAvailableModules($session_id): array
+    {
+
+        $em = $this->getEntityManager();
+        $sub = $em->createQueryBuilder();
+        $qb = $sub;
+        $qb->select('m')
+            ->from('App\Entity\Module', 'm')
+            ->leftJoin('m.programs', 'pr')
+            ->leftJoin('pr.session', 'se')
+            ->where('se.id = :id');
+        
+        $sub = $em->createQueryBuilder();
+
+        $sub->select('mo')
+            ->from('App\Entity\Module', 'mo')
+            ->where($sub->expr()->notIn('mo.id', $qb->getDQL()))
+            ->setParameter('id', $session_id)
+            ->orderBy('mo.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        $query = $sub->getQuery();
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */

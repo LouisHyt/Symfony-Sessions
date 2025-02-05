@@ -1,3 +1,4 @@
+/* Interns tab */
 .interns-container {
     display: flex;
     gap: 2rem;
@@ -57,5 +58,67 @@
         &.unenroll-intern {
             color: #dc3545;
         }
+    }
+}
+
+/* Modules tab */
+/* Modules tab */
+.modules-container {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    & > .module-list {
+        margin-bottom: 1rem;
+    }
+}
+
+.module-row {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.module-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.module-name {
+    flex-grow: 1;
+}
+
+.module-days {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.days-input {
+    width: 60px;
+    margin-right: 0.5rem;
+}
+
+
+.add-module-form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    select,
+    input{
+        flex-grow: 1;
+    }
+
+    button {
+        flex-shrink: 0;
     }
 }

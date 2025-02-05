@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Intern;
+use App\Entity\Program;
 use App\Entity\Session;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
@@ -53,13 +54,15 @@ final class SessionController extends AbstractController{
         }
 
         $availableInterns = $sessionRepository->findAvailableInterns($session->getId());
+        $availableModules = $sessionRepository->findAvailableModules($session->getId());
 
 
         return $this->render('session/add_edit.html.twig', [
             'sessionForm' => $form,
             'isEdit' => $isEdit,
             'session' => $session,
-            'availableInterns' => $availableInterns
+            'availableInterns' => $availableInterns,
+            'availableModules' => $availableModules
         ]);
     }
 
@@ -96,4 +99,18 @@ final class SessionController extends AbstractController{
             'id' => $session->getId()
         ]);
     }
+
+    #[Route('/session/addProgram/{session}', name: 'session_addProgram', requirements: ['session' => '\d+'])]
+    #[Route('/session/editProgram/{program}/{session}', name: 'session_editProgram', requirements: ['session' => '\d+', 'program' => '\d+'])]
+    public function add_editProgram(Session $session, EntityManagerInterface $entityManager): Response
+    {
+        return $this->redirectToRoute('session_edit');
+    }
+
+    #[Route('/session/removeProgram/{program}/{session}', name: 'session_removeProgram', requirements: ['program' => '\d+'])]
+    public function removeProgram(Session $session, Program $program, EntityManagerInterface $entityManager): Response
+    {
+        return $this->redirectToRoute('session_edit');
+    }
+
 }
