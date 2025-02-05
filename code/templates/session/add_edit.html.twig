@@ -55,9 +55,9 @@
             </div>
         </div>
         <div class="form-container">
-            {{ form_start(sessionForm) }}
                 <div class="inner-form">
                     <div data-trigger="infos" class="visible">
+                     {{ form_start(sessionForm) }}
                         <div class="section">
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -90,6 +90,11 @@
                                 </div>
                             </div>
                         </div>
+                         <div class="actions">
+                            <a class="btn cancel" href={{path("session_index")}}>Cancel</a>
+                            {{ form_widget(sessionForm.confirm) }}
+                        </div>
+                        {{ form_end(sessionForm) }}
                     </div>
                     {% if isEdit %} 
                     <div data-trigger="interns" class="interns-container">
@@ -137,44 +142,51 @@
                         </div>
                     </div>
                     <div data-trigger="modules" class="modules-container">
-                        <div class="module-list">
-                            {% for program in session.programs %}
-                                <div class="module-row">
-                                    <form action="{{ path('session_editProgram', {'session': session.id, 'program': program.id}) }}" method="POST" class="module-form">
-                                        <span class="module-name">{{ program.module.name }}</span>
-                                        <div class="module-days">
-                                            <input type="number" name="days" value="{{ program.totaldays }}" min="1" class="form-control days-input">
-                                            <span>days</span>
+                        <div class="section">
+                            <h3>Add a module</h3>
+                            <div class="add-module-form">
+                                <form action="{{ path('session_addProgram', {'session': session.id}) }}" method="POST">
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <label for="module">Module</label>
+                                            <select name="module" class="form-control">
+                                                {% for module in availableModules %}
+                                                    <option value="{{ module.id }}">{{ module.name }}</option>
+                                                {% endfor %}
+                                            </select>
                                         </div>
-                                        <button type="submit" class="btn btn-small btn-primary">Update</button>
-                                        <a href="{{ path('session_removeProgram', {'session': session.id, 'program': program.id}) }}" class="btn btn-small btn-danger">Remove</a>
-                                    </form>
-                                </div>
-                            {% else %}
-                                <p>No modules added to this session yet.</p>
-                            {% endfor %}
+                                        <div class="form-row">
+                                            <label for="totaldays">Days</label>
+                                            <input type="number" name="totaldays" value="1" min="1" class="form-control days-input">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="add-module-btn"> <i class="fa-solid fa-plus"></i> Add </button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="add-module-form">
-                            <form action="{{ path('session_addProgram', {'session': session.id}) }}" method="POST">
-                                <label for="module">Module</label>
-                                <select name="module" class="form-control">
-                                    {% for module in availableModules %}
-                                        <option value="{{ module.id }}">{{ module.name }}</option>
-                                    {% endfor %}
-                                </select>
-                                <label for="totaldays">Days</label>
-                                <input type="number" name="totaldays" value="1" min="1" class="form-control days-input">
-                                <button type="submit" class="btn btn-success">Add Module</button>
-                            </form>
+                        <div class="section">
+                            <h3>Session's modules</h3>
+                            <div class="module-list">
+                                {% for program in session.programs %}
+                                    <div class="module-row">
+                                        <form action="{{ path('session_editProgram', {'session': session.id, 'program': program.id}) }}" method="POST" class="module-form">
+                                            <span class="module-name">{{ program.module.name }}</span>
+                                            <div class="module-days">
+                                                <input type="number" name="totaldays" value="{{ program.totaldays }}" min="1" class="form-control days-input">
+                                                <span>days</span>
+                                            </div>
+                                            <button type="submit" class="form-action btn-update">Update</button>
+                                            <a href="{{ path('session_removeProgram', {'program': program.id}) }}" class="form-action btn-remove">Remove</a>
+                                        </form>
+                                    </div>
+                                {% else %}
+                                    <p>No modules added to this session yet.</p>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                     {% endif %}
                 </div>
-                 <div class="actions">
-                    <a class="btn cancel" href={{path("session_index")}}>Cancel</a>
-                    {{ form_widget(sessionForm.confirm) }}
-                </div>
-            {{ form_end(sessionForm) }}
         </div>
     </div>
 {% endblock %}

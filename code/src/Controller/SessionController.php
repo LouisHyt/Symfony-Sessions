@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Intern;
+use App\Entity\Module;
 use App\Entity\Program;
 use App\Entity\Session;
 use App\Form\SessionType;
@@ -101,16 +102,67 @@ final class SessionController extends AbstractController{
     }
 
     #[Route('/session/addProgram/{session}', name: 'session_addProgram', requirements: ['session' => '\d+'])]
-    #[Route('/session/editProgram/{program}/{session}', name: 'session_editProgram', requirements: ['session' => '\d+', 'program' => '\d+'])]
-    public function add_editProgram(Session $session, EntityManagerInterface $entityManager): Response
+    public function add_Program(Session $session, EntityManagerInterface $entityManager, Request $request): Response
     {
-        return $this->redirectToRoute('session_edit');
+
+        $days = $request->request->get('totaldays');
+        $moduleId = $request->request->get('module');
+
+        // Validation des données
+        if (!is_numeric($days) || $days <= 0) {
+            $this->addFlash('error', 'The amount of days must be a positive number.');
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
+        }
+
+        // Vérification de l'existence du module
+        $module = $entityManager->getRepository(Module::class)->find($moduleId);
+        if (!$module) {
+            $this->addFlash('error', 'The selected module does not exist.');
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
+        }
+
+        // Création et persistance du nouveau Programme
+        $program = new Program();
+        $program->setTotalDays($days);
+        $program->setModule($module);
+        $program->setSession($session);
+
+        $entityManager->persist($program);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'The module "'.$module->getName().'" has been sucessfully added.');
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
     }
 
-    #[Route('/session/removeProgram/{program}/{session}', name: 'session_removeProgram', requirements: ['program' => '\d+'])]
-    public function removeProgram(Session $session, Program $program, EntityManagerInterface $entityManager): Response
+    #[Route('/session/editProgram/{program}/{session}', name: 'session_editProgram', requirements: [ 'program' => '\d+', 'session' => '\d+'])]
+    public function editProgram(Session $session, Program $program = null, EntityManagerInterface $entityManager, Request $request): Response
     {
-        return $this->redirectToRoute('session_edit');
+        $days = $request->request->get('totaldays');
+        if (!is_numeric($days) || $days <= 0) {
+            $this->addFlash('error', 'The amount of days must be a positive number.');
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
+        }
+
+        $program->setTotalDays($days);
+        $entityManager->persist($program);
+        $entityManager->flush();
+        $this->addFlash('success', 'The module '.$program->getModule()->getName().' has been sucessfully updated for the session "'.$session->getName().'" ! ');
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
+    }
+
+    #[Route('/session/removeProgram/{program}/', name: 'session_removeProgram', requirements: ['program' => '\d+'])]
+    public function removeProgram(Program $program, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $entityManager->remove($program);
+        $entityManager->flush();
+        $this->addFlash('success', 'The module "'.$program->getModule()->getName().'" "has been sucessfully removed!');
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
     }
 
 }
