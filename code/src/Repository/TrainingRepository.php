@@ -16,6 +16,28 @@ class TrainingRepository extends ServiceEntityRepository
         parent::__construct($registry, Training::class);
     }
 
+    public function getLastTrainings(): array
+    {
+        return $this->createQueryBuilder('t')
+        ->select(
+                't.name as name', 
+                 'COUNT(DISTINCT se.id) AS sessionCount', 
+                 'COUNT(DISTINCT pr.id) AS moduleCount', 
+                 'COUNT(DISTINCT itr.id) AS internCount',
+                 'COUNT(DISTINCT tra.id) AS trainerCount',
+                 'SUM(DISTINCT pr.totalDays) AS totalDays')
+        ->leftJoin('t.sessions', 'se')
+        ->leftJoin('se.trainer', 'tra')
+        ->leftJoin('se.programs', 'pr')
+        ->leftJoin('pr.module', 'mo')
+        ->leftJoin('se.interns', 'itr')
+        ->groupBy('t.id')
+        ->orderBy('sessionCount', 'DESC')
+        ->setMaxResults(4)
+        ->getQuery()
+        ->getResult();
+    }
+
 //    /**
 //     * @return Training[] Returns an array of Training objects
 //     */

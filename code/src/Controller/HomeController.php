@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Training;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,8 +15,10 @@ final class HomeController extends AbstractController{
     {
 
         $sessionsData = $entityManager->getRepository(Session::class)->getGlobalInfos();
+        $trainingsData = $entityManager->getRepository(Training::class)->getLastTrainings();
         return $this->render('home/index.html.twig', [
             'sessionsData' => $sessionsData,
+            'trainingsData' => $trainingsData
         ]);
     }
 }

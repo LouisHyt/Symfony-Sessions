@@ -88,17 +88,18 @@ body {
     grid-area: main;
     background-color: var(--bg-clr);
     padding: 50px;
+    padding-top: 20px;
     height: 100%;
     position: relative;
     overflow-y: auto;
 }
 
-#content::-webkit-scrollbar {
+*::-webkit-scrollbar {
     background: transparent;
     width: 5px;
 }
   
-#content::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background: #484848;
     border-radius: 5px;
 }
