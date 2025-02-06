@@ -17,6 +17,10 @@ class SecurityController extends AbstractController
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        if($lastUsername){
+            return $this->redirectToRoute('app_home');
+            exit();
+        }
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
@@ -27,6 +31,7 @@ class SecurityController extends AbstractController
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
+        $this->addFlash('success', 'You have been logged out!');
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

@@ -23,27 +23,33 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Email'
                 ]
             ])
             ->add('firstName', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'First Name'
                 ]
             ])
             ->add('lastName', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Last Name'
                 ]
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'mapped' => false,
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
-                'attr' => ['autocomplete' => 'new-password'],
                 'options' => ['attr' => ['class' => 'password-field form-control']],
                 'required' => true,
-                'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password']
+                'first_options' => [
+                    'label' => 'Password',
+                ],
+                'second_options' => [
+                    'label' => 'Repeat Password',
+                ]
             ])
             ->add('register', SubmitType::class, [
                 'attr' => [

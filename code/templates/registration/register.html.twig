@@ -1,23 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktion - Register Page</title>
+    <link rel="icon" href={{asset("images/logo.png")}}>
+    <link rel="preload" href="https://fonts.bunny.net/css?family=montserrat:300,400,500,600,700" as="style">
+    <link href="https://fonts.bunny.net/css?family=montserrat:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href={{ asset('css/auth.css') }}>
-    <title>Register</title>
 </head>
 <body>
-    {{ form_errors(registrationForm) }}
-    {{ form_start(registrationForm, {'attr' : {'class' : 'd-flex flex-column gap-3 justify-content-start align-items-start'}}) }}
-        <h1 class="mb-3">Register</h1>
+    <div class="login-container container">
+        <header>
+            <img src="{{ asset('images/logo.png') }}" alt="Website logo">
+            <h1>Register</h1>
+            <p>If your email is whitelisted, you may create an account.</p>
+        </header>
+        {{ form_start(registrationForm) }}
+            <div class="form-group">
+                <i class="fa-solid fa-envelope"></i>
+                {{ form_widget(registrationForm.email) }}
+            </div>
 
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.firstName) }}
-        {{ form_row(registrationForm.lastName) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.register) }}
-    {{ form_end(registrationForm) }}
+            <div class="form-group">
+                <i class="fa-solid fa-user"></i>
+                {{ form_widget(registrationForm.firstName) }}   
+            </div>
+
+            <div class="form-group">
+                <i class="fa-solid fa-user"></i> 
+                {{ form_widget(registrationForm.lastName) }}
+            </div>
+
+            <div class="form-group">
+                <i class="fa-solid fa-lock"></i>
+                {{ form_widget(registrationForm.plainPassword.first, {'attr': {'placeholder': 'Password'}}) }}
+            </div>
+
+            <div class="form-group">
+                <i class="fa-solid fa-lock"></i>
+                {{ form_widget(registrationForm.plainPassword.second, {'attr': {'placeholder': 'Confirm password'}}) }}
+            </div>
+
+            {{ form_errors(registrationForm, {'attr': {'class': 'error-msg'}}) }}
+            {{ form_widget(registrationForm.register) }}
+        {{ form_end(registrationForm) }}
+    </div>
 </body>
 </html>

@@ -7,9 +7,11 @@
     <link rel="icon" href={{asset("images/logo.png")}}>
     <link rel="preload" href="https://fonts.bunny.net/css?family=montserrat:300,400,500,600,700" as="style">
     <link href="https://fonts.bunny.net/css?family=montserrat:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href={{ asset('css/auth.css') }}>
 </head>
 <body>
+    {% include "partials/flash.html.twig" %}
     <div class="login-container container">
         <header>
             <img src="{{ asset('images/logo.png') }}" alt="Website logo">
@@ -18,30 +20,33 @@
         </header>
         <form method="post">
             <div class="form-group">
+                <i class="fa-solid fa-envelope"></i>
                 <input 
                     type="email" 
                     value="{{ last_username }}" 
                     name="_username" 
                     id="username" 
                     class="form-control" 
-                    autocomplete="email" 
+                    placeholder="Email Adress"
                     required 
                     autofocus
                 >
             </div>
             <div class="form-group">
+                <i class="fa-solid fa-lock"></i>
                 <input 
                     type="password" 
-                    name="_password" 
+                    name="_password"
+                    placeholder="Password" 
                     id="password" 
-                    class="form-control" 
-                    autocomplete="current-password" 
+                    class="form-control"  
                     required
                 >
             </div>
-
+            {% if error %}
+                <div class="error-msg">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
             <button class="btn btn-primary" type="submit">
                 Login
             </button>
